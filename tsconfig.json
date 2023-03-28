@@ -6,6 +6,11 @@
       "src",
       "test"
     ],
+    "target": "ES2020",
+    "lib": [
+      "es2020"
+    ],
+    "esModuleInterop": true,
     "declaration": false,
     "allowSyntheticDefaultImports": true,
     "resolveJsonModule": true,
