@@ -1,39 +1,23 @@
 import { ApolloServer } from '@apollo/server';
 import { startStandaloneServer } from '@apollo/server/standalone';
 import { createContext } from './context.js'
+import { makeSchema } from 'nexus'
+import { join, dirname } from 'path'
+import { fileURLToPath } from 'node:url'
+import { Query, User } from './graphql/index.js'
 
-const typeDefs = `#graphql
+const __dirname = dirname(fileURLToPath(import.meta.url))
 
-  type Book {
-    title: String
-    author: String
-  }
-
-  type Query {
-    books: [Book]
-  }
-`;
-
-const books = [
-  {
-    title: 'The Awakening',
-    author: 'Kate Chopin',
+export const schema = makeSchema({
+  types: [Query, User], // 1
+  outputs: {
+    typegen: join(__dirname, '..', 'nexus-typegen.ts'), // 2
+    schema: join(__dirname, '..', 'schema.graphql'), // 3
   },
-  {
-    title: 'City of Glass',
-    author: 'Paul Auster',
-  },
-];
-
-const resolvers = {
-  Query: {
-    books: () => books,
-  },
-};
+})
 
 const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+  schema
 });
 
 

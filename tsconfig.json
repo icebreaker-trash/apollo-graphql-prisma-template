@@ -7,13 +7,16 @@
     "module": "esnext",
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "types": ["node"]
+    "types": ["node"],
+    "sourceMap": true
   },
   "ts-node": {
     "compilerOptions": {
       "target": "ES2020",
-      "module": "ESNext"
-    }
+      "module": "ESNext",
+      "sourceMap": true
+    },
+    "esm": true
   },
   "include": ["src/**/*"]
 }

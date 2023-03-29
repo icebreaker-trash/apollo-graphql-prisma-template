@@ -4,50 +4,51 @@ const prisma = new PrismaClient()
 
 const userData: Prisma.UserCreateInput[] = [
   {
-    name: 'Alice',
-    email: 'alice@prisma.io',
-    posts: {
-      create: [
-        {
-          title: 'Join the Prisma Slack',
-          content: 'https://slack.prisma.io',
-          published: true,
-        },
-      ],
-    },
-  },
-  {
-    name: 'Nilu',
-    email: 'nilu@prisma.io',
-    posts: {
-      create: [
-        {
-          title: 'Follow Prisma on Twitter',
-          content: 'https://www.twitter.com/prisma',
-          published: true,
-          viewCount: 42,
-        },
-      ],
-    },
-  },
-  {
-    name: 'Mahmoud',
-    email: 'mahmoud@prisma.io',
-    posts: {
-      create: [
-        {
-          title: 'Ask a question about Prisma on GitHub',
-          content: 'https://www.github.com/prisma/prisma/discussions',
-          published: true,
-          viewCount: 128,
-        },
-        {
-          title: 'Prisma on YouTube',
-          content: 'https://pris.ly/youtube',
-        },
-      ],
-    },
-  },
+    name: 'icebreaker',
+    articles: {
+      create: [1, 2, 3, 4, 5].map(x => {
+        const content = x.toString().repeat(20)
+        const name = x.toString()
+        return {
+          content,
+          title: name,
+          comments: {
+            create: [
+              {
+                content,
+                user: {
+                  connectOrCreate: {
+                    create: {
+                      name: 'yyf'
+                    },
+                    where: {
+                      name: 'yyf'
+                    }
+                  },
+
+                }
+              },
+            ],
+            // connectOrCreate:{
+
+            // }
+          },
+          tags: {
+            create: [
+              {
+                name
+              }
+            ]
+          },
+          topic: {
+            create: {
+              name
+            }
+          }
+        }
+      })
+    }
+  }
 ]
 
 async function main() {

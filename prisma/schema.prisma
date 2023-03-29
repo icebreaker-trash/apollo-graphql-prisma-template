@@ -9,8 +9,9 @@ datasource db {
 
 model User {
   id       Int       @id @default(autoincrement())
-  name     String
+  name     String    @unique
   articles Article[]
+  comments Comment[]
 }
 
 model Article {
@@ -37,6 +38,8 @@ model Comment {
   content   String
   article   Article @relation(fields: [articleId], references: [id])
   articleId Int
+  user      User    @relation(fields: [userId], references: [id])
+  userId    Int
 }
 
 model Tag {
