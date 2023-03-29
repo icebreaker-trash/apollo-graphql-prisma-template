@@ -2,11 +2,46 @@
 ### Do not make changes to this file directly
 
 
+type Article {
+  comments: [Comment]
+  content: String
+  id: Int
+  tags: [Tag]
+  title: String
+  topic: Topic
+  user: User
+  userId: Int
+}
+
+type Comment {
+  article: Article
+  articleId: Int
+  content: String
+  id: Int
+  user: User
+  userId: Int
+}
+
 type Query {
   allUsers: [User]
 }
 
+type Tag {
+  articles: [Article]
+  id: Int
+  name: String
+}
+
+type Topic {
+  article: Article
+  articleId: Int
+  id: Int
+  name: String
+}
+
 type User {
+  articles: [Article]
+  comments: [Comment]
   id: Int
   name: String
 }

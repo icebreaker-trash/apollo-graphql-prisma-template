@@ -4,12 +4,12 @@ import { createContext } from './context.js'
 import { makeSchema } from 'nexus'
 import { join, dirname } from 'path'
 import { fileURLToPath } from 'node:url'
-import { Query, User } from './graphql/index.js'
+import { Query, User, Article, Comment, Tag, Topic } from './graphql/index.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const schema = makeSchema({
-  types: [Query, User], // 1
+  types: [Query, User, Article, Comment, Tag, Topic], // 1
   outputs: {
     typegen: join(__dirname, '..', 'nexus-typegen.ts'), // 2
     schema: join(__dirname, '..', 'schema.graphql'), // 3
