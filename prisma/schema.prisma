@@ -8,20 +8,39 @@ datasource db {
 }
 
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  posts Post[]
+  id       Int       @id @default(autoincrement())
+  name     String
+  articles Article[]
 }
 
-model Post {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  title     String
-  content   String?
-  published Boolean  @default(false)
-  viewCount Int      @default(0)
-  author    User?    @relation(fields: [authorId], references: [id])
-  authorId  Int?
+model Article {
+  id       Int       @id @default(autoincrement())
+  title    String
+  content  String
+  user     User      @relation(fields: [userId], references: [id])
+  userId   Int
+  comments Comment[]
+  topic    Topic? //  @relation(fields: [topicId], references: [id])
+  tags     Tag[]
+  // topicId  Int
+}
+
+model Topic {
+  id        Int     @id @default(autoincrement())
+  name      String
+  article   Article @relation(fields: [articleId], references: [id])
+  articleId Int     @unique
+}
+
+model Comment {
+  id        Int     @id @default(autoincrement())
+  content   String
+  article   Article @relation(fields: [articleId], references: [id])
+  articleId Int
+}
+
+model Tag {
+  id       Int       @id @default(autoincrement())
+  name     String
+  articles Article[]
 }

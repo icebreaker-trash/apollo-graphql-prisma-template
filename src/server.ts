@@ -1,7 +1,7 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { schema } from './schema'
-import { Context, createContext } from './context'
+import { schema } from './schema.js'
+import { Context, createContext } from './context.js'
 
 const start = async () => {
   const server = new ApolloServer<Context>({ schema })
