@@ -1,52 +1,10 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "outDir": "dist",
-    "rootDirs": [
-      "src",
-      "test"
-    ],
-    "target": "ES2020",
-    "lib": [
-      "es2020"
-    ],
+    "rootDir": "src",
     "esModuleInterop": true,
-    "declaration": false,
-    "allowSyntheticDefaultImports": true,
-    "resolveJsonModule": true,
-    "moduleResolution": "Node",
-    "module": "ESNext",
-    "sourceMap": true,
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
-    "plugins": [
-      {
-        "transform": "typescript-transform-paths",
-        "afterDeclarations": true
-      }
-    ]
+    "lib": ["esnext"],
+    "strict": true,
   },
-  "exclude": [
-    "dist",
-    "node_modules",
-    "test/types"
-  ],
-  "include": [
-    "src/**/*",
-    "types/**/*",
-    "test/**/*",
-    "rollup.config.ts"
-  ],
-  "ts-node": {
-    "compilerOptions": {
-      "module": "CommonJS"
-    },
-    "require": [
-      "tsconfig-paths/register"
-    ]
-  }
+  "include": ["src/**/*"]
 }
