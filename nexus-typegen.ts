@@ -60,7 +60,6 @@ export interface NexusGenObjects {
   }
   User: { // root type
     articles?: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
-    comments?: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
     id?: number | null; // Int
     name?: string | null; // String
   }

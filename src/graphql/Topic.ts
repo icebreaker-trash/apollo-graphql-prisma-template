@@ -1,5 +1,6 @@
 import { objectType, list } from 'nexus'
-export const Topic = objectType({
+
+export const TopicType = objectType({
   name: 'Topic',
   definition(t) {
     t.int('id')

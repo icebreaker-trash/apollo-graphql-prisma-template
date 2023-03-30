@@ -1,5 +1,5 @@
 import { objectType, list } from 'nexus'
-export const Comment = objectType({
+export const CommentType = objectType({
   name: 'Comment',
   definition(t) {
     t.int('id')

@@ -1,5 +1,5 @@
 import { objectType, list } from 'nexus'
-export const Tag = objectType({
+export const TagType = objectType({
   name: 'Tag',
   definition(t) {
     t.int('id')

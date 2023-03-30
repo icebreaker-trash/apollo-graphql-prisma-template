@@ -1,5 +1,8 @@
 import { objectType, list } from 'nexus'
-export const User = objectType({
+import { prisma } from '../context.js'
+import { GraphQLResolveInfo } from 'graphql'
+
+export const UserType = objectType({
   name: 'User',
   definition(t) {
     t.int('id') // <- Field named `id` of type `Int`
@@ -8,7 +11,19 @@ export const User = objectType({
       type: list('Article')
     })
     t.field('comments', {
-      type: list('Comment')
+      type: list('Comment'),
+      async resolve(parent, args, context, info: GraphQLResolveInfo) {
+        // info.parentType.name === 'User'
+        if (parent.comments) {
+          return parent.comments
+        }
+        const res = await prisma.comment.findMany({
+          where: {
+            userId: parent.id
+          }
+        })
+        return res
+      }
       // resolve(p){
       //   console.log(p)
       // }
