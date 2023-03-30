@@ -9,7 +9,7 @@ const userData: Prisma.UserCreateInput[] = new Array(10)
     return {
       name,
       articles: {
-        create: new Array(5).fill(0).map((_, x) => {
+        create: new Array(5).fill(0).map<Prisma.ArticleCreateInput>((_, x) => {
           const content = x + '正文内容:' + faker.random.words(200)
           const title = faker.random.words()
 
@@ -33,12 +33,20 @@ const userData: Prisma.UserCreateInput[] = new Array(10)
                 }
               ]
             },
+            // user: {
+            //   connect: {
+            //     name
+            //   }
+            // },
             tags: {
-              create: [
-                {
+              connectOrCreate: {
+                create: {
+                  name
+                },
+                where: {
                   name
                 }
-              ]
+              }
             },
             topic: {
               create: {

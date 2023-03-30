@@ -108,3 +108,4 @@ types
 stats/*.html
 
 *.db
+*.db-journal
