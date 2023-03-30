@@ -1,17 +1,19 @@
 import { PrismaClient, Prisma } from '@prisma/client'
-
+import { faker } from '@faker-js/faker/locale/zh_CN';
 const prisma = new PrismaClient()
 
-const userData: Prisma.UserCreateInput[] = [
-  {
-    name: 'icebreaker',
+const userData: Prisma.UserCreateInput[] = new Array(10).fill(0).map((_, idx) => {
+  const name = faker.name.fullName()
+  return {
+    name,
     articles: {
-      create: [1, 2, 3, 4, 5].map(x => {
-        const content = x.toString().repeat(20)
-        const name = x.toString()
+      create: new Array(5).fill(0).map((_, x) => {
+        const content = x + '正文内容:' + faker.random.words(200)
+        const title = faker.random.words()
+        
         return {
           content,
-          title: name,
+          title,
           comments: {
             create: [
               {
@@ -29,9 +31,6 @@ const userData: Prisma.UserCreateInput[] = [
                 }
               },
             ],
-            // connectOrCreate:{
-
-            // }
           },
           tags: {
             create: [
@@ -49,7 +48,7 @@ const userData: Prisma.UserCreateInput[] = [
       })
     }
   }
-]
+})
 
 async function main() {
   console.log(`Start seeding ...`)
