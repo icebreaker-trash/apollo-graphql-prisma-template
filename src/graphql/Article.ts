@@ -18,6 +18,5 @@ export const Article = objectType({
     t.field('tags', {
       type: list('Tag')
     })
-
-  },
+  }
 })

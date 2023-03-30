@@ -9,5 +9,5 @@ export const Query = objectType({
         return prisma.user.findMany()
       }
     })
-  },
+  }
 })

@@ -7,5 +7,5 @@ export interface Context {
 export const prisma = new PrismaClient()
 
 export const createContext = async () => ({
-  prisma,
+  prisma
 })

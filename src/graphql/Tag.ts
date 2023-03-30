@@ -5,11 +5,8 @@ export const Tag = objectType({
     t.int('id')
     t.string('name')
 
-
     t.field('articles', {
       type: list('Article')
     })
-
-
-  },
+  }
 })

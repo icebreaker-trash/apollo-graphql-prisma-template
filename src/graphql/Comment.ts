@@ -7,14 +7,11 @@ export const Comment = objectType({
     t.int('articleId')
     t.int('userId')
 
-
     t.field('user', {
       type: 'User'
     })
     t.field('article', {
       type: 'Article'
     })
-
-
-  },
+  }
 })

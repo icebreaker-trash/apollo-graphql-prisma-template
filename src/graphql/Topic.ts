@@ -5,9 +5,9 @@ export const Topic = objectType({
     t.int('id')
     t.string('name')
     t.int('articleId')
-    
+
     t.field('article', {
       type: 'Article'
     })
-  },
+  }
 })
