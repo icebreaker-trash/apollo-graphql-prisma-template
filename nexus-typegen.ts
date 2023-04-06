@@ -59,9 +59,8 @@ export interface NexusGenObjects {
     name?: string | null; // String
   }
   User: { // root type
-    articles?: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
-    id?: number | null; // Int
-    name?: string | null; // String
+    id: number; // Int!
+    name: string; // String!
   }
 }
 
@@ -109,10 +108,10 @@ export interface NexusGenFieldTypes {
     name: string | null; // String
   }
   User: { // field return type
-    articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
-    comments: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
-    id: number | null; // Int
-    name: string | null; // String
+    articles: NexusGenRootTypes['Article'][]; // [Article!]!
+    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    id: number; // Int!
+    name: string; // String!
   }
 }
 

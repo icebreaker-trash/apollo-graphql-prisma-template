@@ -1,9 +1,9 @@
 import { ApolloServer } from '@apollo/server'
 import { startStandaloneServer } from '@apollo/server/standalone'
-import { createContext } from './context.js'
+import { createContext } from './context'
 import { makeSchema } from 'nexus'
 import { join, dirname } from 'path'
-import { fileURLToPath } from 'node:url'
+// import { fileURLToPath } from 'node:url'
 import {
   ArticleType,
   CommentType,
@@ -11,9 +11,9 @@ import {
   TagType,
   TopicType,
   UserType
-} from './graphql/index.js'
+} from './graphql'
 
-const __dirname = dirname(fileURLToPath(import.meta.url))
+// const __dirname = dirname(fileURLToPath(import.meta.url))
 
 export const schema = makeSchema({
   types: [ArticleType, CommentType, QueryType, TagType, TopicType, UserType], // 1
@@ -39,9 +39,13 @@ const server = new ApolloServer({
   schema
 })
 
-const { url } = await startStandaloneServer(server, {
-  listen: { port: 4000 },
-  context: createContext
-})
+async function bootstrap() {
+  const { url } = await startStandaloneServer(server, {
+    listen: { port: 4000 },
+    context: createContext
+  })
 
-console.log(`🚀  Server ready at: ${url}`)
+  console.log(`🚀  Server ready at: ${url}`)
+}
+
+bootstrap()

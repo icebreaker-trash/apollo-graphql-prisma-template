@@ -1,5 +1,5 @@
 import { objectType, list } from 'nexus'
-import { prisma } from '../context.js'
+import { prisma } from '../context'
 import { parse, simplify, ResolveTree } from 'graphql-parse-resolve-info'
 
 export const QueryType = objectType({

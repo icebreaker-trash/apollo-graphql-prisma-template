@@ -40,8 +40,8 @@ type Topic {
 }
 
 type User {
-  articles: [Article]
-  comments: [Comment]
-  id: Int
-  name: String
+  articles: [Article!]!
+  comments: [Comment!]!
+  id: Int!
+  name: String!
 }

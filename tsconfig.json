@@ -1,22 +1,39 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "outDir": "./dist",
+    "rootDir": ".",
+    "strict": true,
     "moduleResolution": "node",
+    "baseUrl": ".",
     "esModuleInterop": true,
-    "types": ["node"],
-    "sourceMap": true
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "lib": [
+      "esnext"
+    ],
+    "typeRoots": [
+      "./node_modules/@types"
+    ],
+    "sourceMap": true,
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
   },
-  "ts-node": {
-    "compilerOptions": {
-      "target": "ES2020",
-      "module": "ESNext",
-      "sourceMap": true
-    },
-    "esm": true
-  },
-  "include": ["src/**/*"]
+  "include": [
+    "src/**/*",
+    "prisma/**/*",
+    "test/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ],
+  "compileOnSave": false
 }
