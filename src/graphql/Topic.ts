@@ -1,14 +1,11 @@
 import { objectType, list } from 'nexus'
-
+import { Topic } from 'nexus-prisma'
 export const TopicType = objectType({
-  name: 'Topic',
+  name: Topic.$name,
   definition(t) {
-    t.int('id')
-    t.string('name')
-    t.int('articleId')
-
-    t.field('article', {
-      type: 'Article'
-    })
+    t.field(Topic.id)
+    t.field(Topic.name)
+    t.field(Topic.articleId)
+    t.field(Topic.article)
   }
 })

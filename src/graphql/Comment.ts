@@ -1,17 +1,14 @@
 import { objectType, list } from 'nexus'
+import { Comment } from 'nexus-prisma'
 export const CommentType = objectType({
-  name: 'Comment',
+  name: Comment.$name,
   definition(t) {
-    t.int('id')
-    t.string('content')
-    t.int('articleId')
-    t.int('userId')
+    t.field(Comment.id)
+    t.field(Comment.content)
 
-    t.field('user', {
-      type: 'User'
-    })
-    t.field('article', {
-      type: 'Article'
-    })
+    t.field(Comment.articleId)
+    t.field(Comment.userId)
+    t.field(Comment.user)
+    t.field(Comment.article)
   }
 })

@@ -26,7 +26,7 @@
     "@icebreakers/eslint-config-ts": "^1.0.4",
     "@types/node": "18.15.11",
     "cross-env": "^7.0.3",
-    "eslint": "^8.37.0",
+    "eslint": "^8.38.0",
     "nodemon": "^2.0.22",
     "prettier": "^2.8.7",
     "prisma": "4.12.0",

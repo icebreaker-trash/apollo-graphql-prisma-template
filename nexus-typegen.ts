@@ -29,34 +29,26 @@ export interface NexusGenScalars {
 
 export interface NexusGenObjects {
   Article: { // root type
-    comments?: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
-    content?: string | null; // String
-    id?: number | null; // Int
-    tags?: Array<NexusGenRootTypes['Tag'] | null> | null; // [Tag]
-    title?: string | null; // String
-    topic?: NexusGenRootTypes['Topic'] | null; // Topic
-    user?: NexusGenRootTypes['User'] | null; // User
-    userId?: number | null; // Int
+    content: string; // String!
+    id: number; // Int!
+    title: string; // String!
+    userId: number; // Int!
   }
   Comment: { // root type
-    article?: NexusGenRootTypes['Article'] | null; // Article
-    articleId?: number | null; // Int
-    content?: string | null; // String
-    id?: number | null; // Int
-    user?: NexusGenRootTypes['User'] | null; // User
-    userId?: number | null; // Int
+    articleId: number; // Int!
+    content: string; // String!
+    id: number; // Int!
+    userId: number; // Int!
   }
   Query: {};
   Tag: { // root type
-    articles?: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
-    id?: number | null; // Int
-    name?: string | null; // String
+    id: number; // Int!
+    name: string; // String!
   }
   Topic: { // root type
-    article?: NexusGenRootTypes['Article'] | null; // Article
-    articleId?: number | null; // Int
-    id?: number | null; // Int
-    name?: string | null; // String
+    articleId: number; // Int!
+    id: number; // Int!
+    name: string; // String!
   }
   User: { // root type
     id: number; // Int!
@@ -76,36 +68,36 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Article: { // field return type
-    comments: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
-    content: string | null; // String
-    id: number | null; // Int
-    tags: Array<NexusGenRootTypes['Tag'] | null> | null; // [Tag]
-    title: string | null; // String
+    comments: NexusGenRootTypes['Comment'][]; // [Comment!]!
+    content: string; // String!
+    id: number; // Int!
+    tags: NexusGenRootTypes['Tag'][]; // [Tag!]!
+    title: string; // String!
     topic: NexusGenRootTypes['Topic'] | null; // Topic
-    user: NexusGenRootTypes['User'] | null; // User
-    userId: number | null; // Int
+    user: NexusGenRootTypes['User']; // User!
+    userId: number; // Int!
   }
   Comment: { // field return type
-    article: NexusGenRootTypes['Article'] | null; // Article
-    articleId: number | null; // Int
-    content: string | null; // String
-    id: number | null; // Int
-    user: NexusGenRootTypes['User'] | null; // User
-    userId: number | null; // Int
+    article: NexusGenRootTypes['Article']; // Article!
+    articleId: number; // Int!
+    content: string; // String!
+    id: number; // Int!
+    user: NexusGenRootTypes['User']; // User!
+    userId: number; // Int!
   }
   Query: { // field return type
     allUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   Tag: { // field return type
-    articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
-    id: number | null; // Int
-    name: string | null; // String
+    articles: NexusGenRootTypes['Article'][]; // [Article!]!
+    id: number; // Int!
+    name: string; // String!
   }
   Topic: { // field return type
-    article: NexusGenRootTypes['Article'] | null; // Article
-    articleId: number | null; // Int
-    id: number | null; // Int
-    name: string | null; // String
+    article: NexusGenRootTypes['Article']; // Article!
+    articleId: number; // Int!
+    id: number; // Int!
+    name: string; // String!
   }
   User: { // field return type
     articles: NexusGenRootTypes['Article'][]; // [Article!]!

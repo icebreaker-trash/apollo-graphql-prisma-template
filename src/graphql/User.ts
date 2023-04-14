@@ -1,6 +1,6 @@
-import { objectType, list } from 'nexus'
-import { prisma } from '../context'
-import { GraphQLResolveInfo } from 'graphql'
+import { objectType } from 'nexus'
+// import { prisma } from '../context'
+// import { GraphQLResolveInfo } from 'graphql'
 import { User } from 'nexus-prisma'
 export const UserType = objectType({
   name: User.$name,
