@@ -18,6 +18,6 @@ prisma.$use(async (params, next) => {
   // console.log('This is middleware!')
   // Modify or interrogate params here
   const res = await next(params)
-  console.log(params.action, params.model)
+  console.log(params.action, params.model, params.args)
   return res
 })
