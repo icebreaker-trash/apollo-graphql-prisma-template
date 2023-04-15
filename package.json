@@ -16,7 +16,9 @@
     "@apollo/server": "4.6.0",
     "@prisma/client": "4.12.0",
     "graphql": "16.6.0",
+    "graphql-depth-limit": "^1.1.0",
     "graphql-parse-resolve-info": "^4.13.0",
+    "graphql-query-complexity": "^0.12.0",
     "graphql-scalars": "1.21.3",
     "nexus": "1.3.0",
     "nexus-prisma": "^1.0.5"
@@ -24,6 +26,7 @@
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
     "@icebreakers/eslint-config-ts": "^1.0.4",
+    "@types/graphql-depth-limit": "^1.1.3",
     "@types/node": "18.15.11",
     "cross-env": "^7.0.3",
     "eslint": "^8.38.0",

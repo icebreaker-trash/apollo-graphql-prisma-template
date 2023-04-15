@@ -5,7 +5,7 @@ import { makeSchema } from 'nexus'
 import { join } from 'path'
 
 import { User, Article, Comment, Prisma } from '@prisma/client'
-
+import { rule } from './complexity'
 import { getFields } from './fields'
 import fs from 'fs'
 // import { fileURLToPath } from 'node:url'
@@ -158,7 +158,8 @@ async function bootstrap() {
           })
         }
       }
-    }
+    },
+    validationRules: [rule]
   })
 
   const { url: normalServerUrl } = await startStandaloneServer(normalServer, {
