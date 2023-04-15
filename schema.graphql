@@ -23,6 +23,8 @@ type Comment {
 }
 
 type Query {
+  allArticles: [Article]
+  allComments: [Comment]
   allUsers: [User]
 }
 

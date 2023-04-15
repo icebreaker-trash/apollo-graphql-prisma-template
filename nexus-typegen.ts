@@ -86,6 +86,8 @@ export interface NexusGenFieldTypes {
     userId: number; // Int!
   }
   Query: { // field return type
+    allArticles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
+    allComments: Array<NexusGenRootTypes['Comment'] | null> | null; // [Comment]
     allUsers: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   Tag: { // field return type
@@ -127,6 +129,8 @@ export interface NexusGenFieldTypeNames {
     userId: 'Int'
   }
   Query: { // field return type name
+    allArticles: 'Article'
+    allComments: 'Comment'
     allUsers: 'User'
   }
   Tag: { // field return type name
