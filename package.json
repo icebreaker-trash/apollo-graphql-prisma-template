@@ -1,5 +1,5 @@
 {
-  "name": "typescript-graphql-nexus",
+  "name": "apollo-graphql-prisma-template",
   "license": "MIT",
   "scripts": {
     "compile": "tsc",
