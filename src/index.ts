@@ -8,7 +8,7 @@ import { User, Article, Comment, Prisma } from '@prisma/client'
 import { rule } from './complexity'
 import { getFields } from './fields'
 import fs from 'fs'
-import depthLimit from 'graphql-depth-limit-ts'
+// import depthLimit from 'graphql-depth-limit-ts'
 // import { fileURLToPath } from 'node:url'
 import {
   ArticleType,
@@ -160,7 +160,7 @@ async function bootstrap() {
         }
       }
     },
-    validationRules: [rule, depthLimit(10)]
+    validationRules: [rule] // depthLimit(10)
   })
 
   const { url: normalServerUrl } = await startStandaloneServer(normalServer, {

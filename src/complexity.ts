@@ -1,9 +1,86 @@
+/* eslint-disable no-case-declarations */
+import {
+  GraphQLError,
+  Kind,
+  DefinitionNode,
+  FragmentDefinitionNode,
+  OperationDefinitionNode,
+  ValidationContext,
+  ASTNode
+} from 'graphql'
+
 import {
   createComplexityRule,
   simpleEstimator,
-  fieldExtensionsEstimator
+  fieldExtensionsEstimator,
+  ComplexityEstimator,
+  ComplexityEstimatorArgs
 } from 'graphql-query-complexity'
-import { GraphQLError } from 'graphql/error/GraphQLError'
+
+function getQueriesAndMutations(definitions: readonly DefinitionNode[]) {
+  return definitions.reduce<Record<string, OperationDefinitionNode>>(
+    (map, definition) => {
+      if (definition.kind === Kind.OPERATION_DEFINITION) {
+        map[definition.name ? definition.name.value : ''] = definition
+      }
+      return map
+    },
+    {}
+  )
+}
+
+function getFragments(definitions: readonly DefinitionNode[]) {
+  return definitions.reduce<Record<string, FragmentDefinitionNode>>(
+    (map, definition) => {
+      if (definition.kind === Kind.FRAGMENT_DEFINITION) {
+        map[definition.name.value] = definition
+      }
+      return map
+    },
+    {}
+  )
+}
+//  fragments: Record<string, FragmentDefinitionNode>,
+function determineDepth(node: ASTNode, depthSoFar: number = 0): number {
+  switch (node.kind) {
+    case Kind.FIELD:
+      // by default, ignore the introspection fields which begin with double underscores
+      // __typename ignore
+      const shouldIgnore = /^__/.test(node.name.value)
+
+      if (shouldIgnore || !node.selectionSet) {
+        return 0
+      }
+      return (
+        1 +
+        Math.max(
+          ...node.selectionSet.selections.map((selection) =>
+            determineDepth(selection, depthSoFar + 1)
+          )
+        )
+      )
+    case Kind.FRAGMENT_SPREAD:
+      return determineDepth(node, depthSoFar + 1)
+    case Kind.INLINE_FRAGMENT:
+    case Kind.FRAGMENT_DEFINITION:
+    case Kind.OPERATION_DEFINITION:
+      return Math.max(
+        ...node.selectionSet.selections.map((selection) =>
+          determineDepth(selection, depthSoFar)
+        )
+      )
+    default:
+      throw new Error('uh oh! depth crawler cannot handle: ' + node.kind)
+  }
+}
+
+// 从内到外的顺序，同时会 resolve fragment
+export function myCustomEstimator(): ComplexityEstimator {
+  return (args: ComplexityEstimatorArgs): number | void => {
+    const depth = determineDepth(args.node)
+    return depth
+  }
+}
 
 export const rule = createComplexityRule({
   // The maximum allowed query complexity, queries above this threshold will be rejected
@@ -39,15 +116,15 @@ export const rule = createComplexityRule({
   // If no estimator returns a value, an exception is raised.
   estimators: [
     // Add more estimators here...
-
     // This will assign each field a complexity of 1 if no other estimator
     // returned a value.
     // fieldExtensionsEstimator(),
     // https://www.npmjs.com/package/graphql-depth-limit
     // https://github.com/4Catalyzer/graphql-validation-complexity
+    // myCustomEstimator()
     // 字段数量处理器
-    simpleEstimator({
-      defaultComplexity: 1
-    })
+    // simpleEstimator({
+    //   defaultComplexity: 1
+    // })
   ]
 })
