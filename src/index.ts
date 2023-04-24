@@ -159,8 +159,8 @@ async function bootstrap() {
           })
         }
       }
-    },
-    validationRules: [rule] // depthLimit(10)
+    }
+    // validationRules: [rule] // depthLimit(10)
   })
 
   const { url: normalServerUrl } = await startStandaloneServer(normalServer, {
