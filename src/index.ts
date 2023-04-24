@@ -5,7 +5,7 @@ import { makeSchema } from 'nexus'
 import { join } from 'path'
 
 import { User, Article, Comment, Prisma } from '@prisma/client'
-import { rule } from './complexity'
+// import { rule } from './complexity'
 import { getFields } from './fields'
 import fs from 'fs'
 // import depthLimit from 'graphql-depth-limit-ts'
@@ -71,14 +71,24 @@ async function bootstrap() {
         },
         allArticles(_, args, contextValue, info) {
           const fields = getFields<Prisma.ArticleSelect>(info)
+          const commentFields = fields.comments?.fieldsByTypeName.Comment
 
-          return prisma.article.findMany({
-            select: {
-              id: true,
-              content: Boolean(fields.content),
-              title: Boolean(fields.title),
-              userId: Boolean(fields.userId || fields.user)
+          const select: Prisma.ArticleSelect = {
+            id: true,
+            content: Boolean(fields.content),
+            title: Boolean(fields.title),
+            userId: Boolean(fields.userId || fields.user)
+          }
+          if (commentFields) {
+            select.comments = {
+              select: {
+                id: true,
+                content: Boolean(commentFields.content)
+              }
             }
+          }
+          return prisma.article.findMany({
+            select
           })
         },
         allComments(_, args, contextValue, info) {
@@ -112,7 +122,19 @@ async function bootstrap() {
         }
       },
       Article: {
-        comments(parent: Article, args, contextValue, info) {
+        comments(
+          parent: Prisma.ArticleGetPayload<{
+            include: {
+              comments: true
+            }
+          }>,
+          args,
+          contextValue,
+          info
+        ) {
+          if (parent.comments) {
+            return parent.comments
+          }
           const fields = getFields<Prisma.CommentSelect>(info)
 
           return prisma.comment.findMany({
